@@ -21,9 +21,11 @@ body, html {
 
 .logo {
     display: block; /* Center the logo */
-    margin: 0 auto 20px; /* Center and add space below */
-    width: 100px; /* Adjust width as needed */
+    margin: 0 50px 20px; /* Center and add space below */
+    
+    width: 500px  ; /* Adjust width as needed */
     height: auto; /* Maintain aspect ratio */
+    
 }
 
 .input-group {
