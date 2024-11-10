@@ -29,6 +29,3 @@ def loginUser():
         return jsonify({"message": " Log in successful!", "access_token": access_token})
     
     return jsonify({"message": "Invalid credentials"}), 401
-
-if __name__ == "__main__":
-    app.run(debug=True)
