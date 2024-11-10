@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PlusCircle } from 'lucide-react';
 
 const Demo = () => {
+  // This state could be lifted to a parent component or context
+  // when implementing the meal selection page
+  const [totalCalories, setTotalCalories] = useState(0);
+
+  // This function would be called when returning from the meal selection page
+  const handleAddMealCalories = (newCalories) => {
+    setTotalCalories(prev => prev + newCalories);
+  };
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <Header username="John Doe" />
       <div className="max-w-md mx-auto mt-8">
-        <CalorieCounter calories={1500} dailyGoal={2000} />
+        <CalorieCounter 
+          calories={totalCalories} 
+          dailyGoal={2000} 
+        />
       </div>
     </div>
   );
@@ -50,6 +62,12 @@ const CalorieCounter = ({ calories = 0, dailyGoal = 2000 }) => {
   const normalizedRadius = radius - strokeWidth * 2;
   const circumference = normalizedRadius * 2 * Math.PI;
   const strokeDashoffset = circumference - (percentage / 100) * circumference;
+
+  // This would be replaced with your navigation logic
+  const handleAddClick = () => {
+    // Navigate to meal selection page
+    console.log('Navigate to meal selection page');
+  };
 
   return (
     <div className="flex flex-col items-center justify-center p-8 bg-white rounded-lg shadow-sm">
@@ -99,7 +117,8 @@ const CalorieCounter = ({ calories = 0, dailyGoal = 2000 }) => {
         </p>
         
         <button
-          type="submit"
+          onClick={handleAddClick}
+          type="button"
           className="mt-4 w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 flex items-center justify-center gap-2"
         >
           <PlusCircle size={20} />
