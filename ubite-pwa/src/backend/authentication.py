@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_jwt_extended import JWTManager, create_access_token
 from werkzeug.security import generate_password_hash, check_password_hash
+from dbLookup import retrieve_user
 
 app = Flask(__name__)
 
@@ -26,6 +27,7 @@ def loginUser():
     
     if user and check_password_hash(user, data["password"]):
         access_token = create_access_token(identity=data["email"])
-        return jsonify({"message": " Log in successful!", "access_token": access_token})
+        calorie_count = retrieve_user(user["email"])
+        return jsonify({"message": " Log in successful!", "access_token": access_token, "calories": calorie_count})
     
     return jsonify({"message": "Invalid credentials"}), 401
